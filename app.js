@@ -26,17 +26,30 @@ const dsaTopics = [
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
-    const generateBtn = document.getElementById('generateBtn');
-    const planContainer = document.getElementById('planContainer');
-    const overallProgress = document.getElementById('overallProgress');
-    const progressText = document.getElementById('progressText');
-    const chatInput = document.getElementById('chatInput');
-    const sendChat = document.getElementById('sendChat');
-    const chatBox = document.getElementById('chatBox');
+  const generateBtn = document.getElementById('generateBtn');
+  const planContainer = document.getElementById('planContainer');
+  const overallProgress = document.getElementById('overallProgress');
+  const progressText = document.getElementById('progressText');
+  const chatInput = document.getElementById('chatInput');
+  const sendChat = document.getElementById('sendChat');
+  const chatBox = document.getElementById('chatBox');
+  const darkModeToggle = document.getElementById('darkModeToggle');
 
-    // Load state from localStorage
-    let completedTopics = JSON.parse(localStorage.getItem('dsa_completed')) || [];
-    let currentPlan = JSON.parse(localStorage.getItem('dsa_current_plan')) || null;
+  // Load state from localStorage
+  let completedTopics = JSON.parse(localStorage.getItem('dsa_completed')) || [];
+  let currentPlan = JSON.parse(localStorage.getItem('dsa_current_plan')) || null;
+
+  // Dark mode handling
+  const isDarkMode = localStorage.getItem('darkMode') === 'true';
+  if (isDarkMode) {
+    document.documentElement.classList.add('dark');
+  }
+
+  darkModeToggle.addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark');
+    const isNowDark = document.documentElement.classList.contains('dark');
+    localStorage.setItem('darkMode', isNowDark);
+  });
 
     if (currentPlan) {
         renderPlan(currentPlan);
@@ -67,10 +80,10 @@ document.addEventListener('DOMContentLoaded', () => {
         planContainer.innerHTML = '';
         const weeks = [...new Set(plan.map(t => t.week))].sort((a, b) => a - b);
 
-        weeks.forEach(weekNum => {
-            const weekTopics = plan.filter(t => t.week === weekNum);
-            const weekDiv = document.createElement('div');
-            weekDiv.className = 'bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden';
+  weeks.forEach(weekNum => {
+    const weekTopics = plan.filter(t => t.week === weekNum);
+    const weekDiv = document.createElement('div');
+    weekDiv.className = 'bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden dark:bg-slate-800 dark:border-slate-700';
             
             let topicsHtml = weekTopics.map(topic => `
                 <div class="flex items-center justify-between p-4 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors">
