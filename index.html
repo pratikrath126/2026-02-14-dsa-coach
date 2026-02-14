@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Coach & Study Planner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .topic-card:hover { transform: translateY(-2px); }
+        .progress-bar { transition: width 0.5s ease-in-out; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans">
+    <nav class="bg-indigo-600 text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold flex items-center gap-2">
+                <i class="fas fa-brain"></i> DSA Coach
+            </h1>
+            <div class="text-sm opacity-80">Project Green • 2026-02-14</div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto py-8 px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Configuration & Dashboard -->
+        <div class="lg:col-span-1 space-y-6">
+            <section class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4 text-slate-800">Your Goal</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Target Role</label>
+                        <input type="text" id="targetRole" placeholder="e.g. SDE-1 at Amazon" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Timeline (Months)</label>
+                        <input type="number" id="timeline" value="6" min="1" max="24" class="w-full p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none">
+                    </div>
+                    <button id="generateBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-md transition-colors">
+                        Generate My Plan
+                    </button>
+                </div>
+            </section>
+
+            <section class="bg-white rounded-xl shadow-sm p-6 border border-slate-200">
+                <h2 class="text-lg font-semibold mb-2 text-slate-800">Overall Progress</h2>
+                <div class="w-full bg-slate-200 rounded-full h-4 mb-2 overflow-hidden">
+                    <div id="overallProgress" class="progress-bar bg-green-500 h-full w-0"></div>
+                </div>
+                <p id="progressText" class="text-sm text-slate-500">0 of 0 topics completed</p>
+            </section>
+
+            <!-- Coaching Chat -->
+            <section class="bg-white rounded-xl shadow-sm border border-slate-200 flex flex-col h-[400px]">
+                <div class="p-4 border-b border-slate-100 bg-slate-50 rounded-t-xl">
+                    <h2 class="text-md font-semibold text-slate-800 flex items-center gap-2">
+                        <i class="fas fa-robot text-indigo-500"></i> DSA Coach Bot
+                    </h2>
+                </div>
+                <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm">
+                    <div class="bg-slate-100 p-3 rounded-lg text-slate-700 self-start max-w-[80%]">
+                        Hello Pratik! I'm your DSA coach. Set your goal and I'll build a roadmap for you.
+                    </div>
+                </div>
+                <div class="p-3 border-t border-slate-100 flex gap-2">
+                    <input type="text" id="chatInput" placeholder="Ask a question..." class="flex-1 p-2 border border-slate-300 rounded-md text-sm outline-none">
+                    <button id="sendChat" class="bg-indigo-600 text-white px-3 py-1 rounded-md hover:bg-indigo-700">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- Weekly Plan -->
+        <div class="lg:col-span-2">
+            <div id="planContainer" class="space-y-6">
+                <div class="text-center py-20 text-slate-400">
+                    <i class="fas fa-calendar-alt text-5xl mb-4"></i>
+                    <p class="text-lg">Generate a plan to see your roadmap here.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-8 text-slate-400 text-sm">
+        <p>&copy; 2026 DSA Coach Bot • <span class="font-medium text-slate-500">Project Green</span> • 2026-02-14</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
